@@ -87,84 +87,96 @@
 #         data=self.current.item
 #         self.current=self.current.next
 #         return data
-class node():
-    def __init__(self,item=None,next=None):
-        self.item=item
-        self.next=next
-class sll():
-    def __init__(self,start=None):
-        self.start=start
+class Node:
+    def __init__(self, item=None, next=None):
+        self.item = item
+        self.next = next
+
+class sll:
+    def __init__(self, start=None):
+        self.start = start
+
     def is_empty(self):
-        return self.start==None      
-    def insert_at_start(self,data):
-        n=node(data,self.start)
-        self.start=n
-    def insert_at_last(self,data):
-        n=node(data)
+        return self.start is None
+
+    def insert_at_start(self, data):
+        n = Node(data, self.start)
+        self.start = n
+
+    def insert_at_last(self, data):
+        n = Node(data)
         if self.is_empty():
-            self.start=n
-        temp=self.start
-        while temp.next :
-            temp=temp.next
-        temp.next=n 
-    def serach(self,item):
-        prev=None
-        temp=self.start
+            self.start = n
+            return
+        temp = self.start
+        while temp.next:
+            temp = temp.next
+        temp.next = n
+
+    def search(self, item):
+        prev = None
+        temp = self.start
         while temp:
-            if temp.item==item:
-                return prev,temp
-            prev=temp
-            temp=temp.next         
-        return None 
-    def insert_after(self,finder,data):
-        temp=self.serach(finder)
-        
+            if temp.item == item:
+                return prev, temp
+            prev = temp
+            temp = temp.next
+        return None, None
+
+    def insert_after(self, finder, data):
+        _, temp = self.search(finder)
         if temp is not None:
-            n=node(data,temp.next)
-            temp.next=n
+            n = Node(data, temp.next)
+            temp.next = n
         else:
-            print("item is not found")
-    def insert_before(self,finder,data):
-        prev,temp=self.serach(finder)
+            print("Item not found")
+
+    def insert_before(self, finder, data):
+        prev, temp = self.search(finder)
         if self.is_empty():
-            print("list is empty")
+            print("List is empty")
+            return
+        n = Node(data, temp)
         if prev is None:
-            n=node(data,temp)
-            self.start=n    
+            self.start = n
         else:
-            n=node(data,temp)
-            prev.next=n    
-                    
-            
-             
-          
+            prev.next = n
+
+    def delete_at_first(self):
+        if self.is_empty():
+            print("List is empty")
+        else:
+            self.start = self.start.next
+
     def print_list(self):
-        temp=self.start 
-        if self. is_empty():
-            print("list is empty",end=" ")   
+        temp = self.start
+        if self.is_empty():
+            print("List is empty", end=" ")
+            return
         while temp:
             print(temp.item, end=" ")
-            temp=temp.next
-        print("\n")    
+            temp = temp.next
+        print()
+  
                 
                                               
                 
             
-mylist=sll()
-mylist.insert_at_start(20)  
-mylist.insert_at_start(10) 
-mylist.insert_at_last(30)
-mylist.insert_at_last(40)
-mylist.insert_at_last(50)
-mylist.insert_before(10,12)
-mylist.insert_before(12,11)
+# mylist=sll()
+# mylist.insert_at_start(20)  
+# mylist.insert_at_start(10) 
+# mylist.insert_at_last(30)
+# mylist.insert_at_last(40)
+# mylist.insert_at_last(50)
+# mylist.insert_before(10,12)
+# mylist.insert_before(12,11)
 
 # mylist.insert_after(30,40)
 # mylist.insert_after(40,45)
 # mylist.insert_after(68,45)
-mylist.print_list()
+# mylist.print_list()
 # mylist.delete_at_first()
-# mylist.printlist() 
+# mylist.print_list() 
 # mylist.delete_item(30)
 # mylist.printlist()
 # for x in mylist:
